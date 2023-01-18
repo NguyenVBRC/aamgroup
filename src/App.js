@@ -1,25 +1,33 @@
-import logo from './logo.svg';
+import { useEffect, useState } from "react"
 import './App.css';
 
 function App() {
+  const [ shape, setShape ] = useState(false);
+  const [ cube, setCube ] = useState("0");
+  const [ triangle, setTriangle ] = useState("20rem");
+  const [ circle, setCircle ] = useState("0");
+
+  function handleMove(){
+    setShape(prevShape => !prevShape);
+    shape ? setCube("0") : setCube("20rem");
+    shape ? setTriangle("20rem") : setTriangle("0");
+    shape ? setCircle("0deg") : setCircle("360deg");
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='shape__container'>
+      <div id='cube' onClick={e=> handleMove(e)} style={{top: cube}}>
+        This is a cube.
+      </div>
+      <div id='triangle' onClick={e=> handleMove(e)} style={{top: triangle}}>
+        <p>This is a triangle.</p>
+      </div>
+      <div id='circle' onClick={e=> handleMove(e)} style={{transform: `rotate(${circle})`}}>
+        <p>This is a big,</p> 
+        <p>green circle.</p>
+      </div>
     </div>
-  );
+  )
 }
 
 export default App;
